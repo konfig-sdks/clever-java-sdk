@@ -1,0 +1,4937 @@
+openapi: 3.0.0
+info:
+  description: Serves the Clever Data API
+  title: Data API
+  version: 3.1.0
+  x-konfig-has-globally-required-security: true
+servers:
+- url: https://api.clever.com/v3.1
+security:
+- oauth: []
+tags:
+- name: Users
+- name: Sections
+- name: Schools
+- name: Courses
+- name: Resources
+- name: Terms
+- name: Districts
+paths:
+  /courses:
+    get:
+      description: Returns a list of courses
+      operationId: Courses_getList
+      parameters:
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: starting_after
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: ending_before
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: count
+        required: false
+        schema:
+          enum:
+          - ""
+          - "true"
+          - "false"
+          - undefined
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CoursesResponse'
+          description: OK Response
+      tags:
+      - Courses
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--courses
+      x-accepts: application/json
+  /courses/{id}:
+    get:
+      description: Returns a specific course
+      operationId: Courses_getSpecificCourse
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CourseResponse'
+          description: OK Response
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Entity Not Found
+          x-do-not-generate: true
+      tags:
+      - Courses
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--courses-id
+      x-accepts: application/json
+  /courses/{id}/district:
+    get:
+      description: Returns the district for a course
+      operationId: Courses_getDistrict
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DistrictResponse'
+          description: OK Response
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Entity Not Found
+          x-do-not-generate: true
+      tags:
+      - Courses
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--courses-id-district
+      x-accepts: application/json
+  /courses/{id}/resources:
+    get:
+      description: Returns the resources for a course
+      operationId: Courses_getResources
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: starting_after
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: ending_before
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourcesResponse'
+          description: OK Response
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Entity Not Found
+          x-do-not-generate: true
+      tags:
+      - Courses
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--courses-id-resources
+      x-accepts: application/json
+  /courses/{id}/schools:
+    get:
+      description: Returns the schools for a course
+      operationId: Courses_getSchools
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: starting_after
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: ending_before
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SchoolsResponse'
+          description: OK Response
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Entity Not Found
+          x-do-not-generate: true
+      tags:
+      - Courses
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--courses-id-schools
+      x-accepts: application/json
+  /courses/{id}/sections:
+    get:
+      description: Returns the sections for a course
+      operationId: Courses_getSections
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: starting_after
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: ending_before
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SectionsResponse'
+          description: OK Response
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Entity Not Found
+          x-do-not-generate: true
+      tags:
+      - Courses
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--courses-id-sections
+      x-accepts: application/json
+  /districts:
+    get:
+      description: Returns a list of districts. In practice this will only return
+        the one district associated with the bearer token
+      operationId: Districts_getList
+      parameters:
+      - explode: true
+        in: query
+        name: count
+        required: false
+        schema:
+          enum:
+          - ""
+          - "true"
+          - "false"
+          - undefined
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DistrictsResponse'
+          description: OK Response
+      tags:
+      - Districts
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--districts
+      x-accepts: application/json
+  /districts/{id}:
+    get:
+      description: Returns a specific district
+      operationId: Districts_getSpecificDistrict
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DistrictResponse'
+          description: OK Response
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Entity Not Found
+          x-do-not-generate: true
+      tags:
+      - Districts
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--districts-id
+      x-accepts: application/json
+  /resources:
+    get:
+      description: Returns a list of resources
+      operationId: Resources_getList
+      parameters:
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: starting_after
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: ending_before
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourcesResponse'
+          description: OK Response
+      tags:
+      - Resources
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--resources
+      x-accepts: application/json
+  /resources/{id}:
+    get:
+      description: Returns a specific resource
+      operationId: Resources_getById
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceResponse'
+          description: OK Response
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Entity Not Found
+          x-do-not-generate: true
+      tags:
+      - Resources
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--resources-id
+      x-accepts: application/json
+  /resources/{id}/courses:
+    get:
+      description: Returns the courses for a resource
+      operationId: Resources_getCourses
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: starting_after
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: ending_before
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CoursesResponse'
+          description: OK Response
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Entity Not Found
+          x-do-not-generate: true
+      tags:
+      - Resources
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--resources-id-courses
+      x-accepts: application/json
+  /resources/{id}/sections:
+    get:
+      description: Returns the sections for a resource
+      operationId: Resources_listSections
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: starting_after
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: ending_before
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SectionsResponse'
+          description: OK Response
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Entity Not Found
+          x-do-not-generate: true
+      tags:
+      - Resources
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--resources-id-sections
+      x-accepts: application/json
+  /resources/{id}/users:
+    get:
+      description: Returns the student and/or teacher users for a resource
+      operationId: Resources_getUsers
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: role
+        required: false
+        schema:
+          enum:
+          - student
+          - teacher
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: starting_after
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: ending_before
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsersResponse'
+          description: OK Response
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Entity Not Found
+          x-do-not-generate: true
+      tags:
+      - Resources
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--resources-id-users
+      x-accepts: application/json
+  /schools:
+    get:
+      description: Returns a list of schools
+      operationId: Schools_list
+      parameters:
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: starting_after
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: ending_before
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: count
+        required: false
+        schema:
+          enum:
+          - ""
+          - "true"
+          - "false"
+          - undefined
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SchoolsResponse'
+          description: OK Response
+      tags:
+      - Schools
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--schools
+      x-accepts: application/json
+  /schools/{id}:
+    get:
+      description: Returns a specific school
+      operationId: Schools_getSpecificSchool
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SchoolResponse'
+          description: OK Response
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Entity Not Found
+          x-do-not-generate: true
+      tags:
+      - Schools
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--schools-id
+      x-accepts: application/json
+  /schools/{id}/courses:
+    get:
+      description: Returns the courses for a school
+      operationId: Schools_getCourses
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: starting_after
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: ending_before
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CoursesResponse'
+          description: OK Response
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Entity Not Found
+          x-do-not-generate: true
+      tags:
+      - Schools
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--schools-id-courses
+      x-accepts: application/json
+  /schools/{id}/district:
+    get:
+      description: Returns the district for a school
+      operationId: Schools_getDistrict
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DistrictResponse'
+          description: OK Response
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Entity Not Found
+          x-do-not-generate: true
+      tags:
+      - Schools
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--schools-id-district
+      x-accepts: application/json
+  /schools/{id}/sections:
+    get:
+      description: Returns the sections for a school
+      operationId: Schools_getSections
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: starting_after
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: ending_before
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SectionsResponse'
+          description: OK Response
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Entity Not Found
+          x-do-not-generate: true
+      tags:
+      - Schools
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--schools-id-sections
+      x-accepts: application/json
+  /schools/{id}/terms:
+    get:
+      description: Returns the terms for a school
+      operationId: Schools_getTerms
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: starting_after
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: ending_before
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TermsResponse'
+          description: OK Response
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Entity Not Found
+          x-do-not-generate: true
+      tags:
+      - Schools
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--schools-id-terms
+      x-accepts: application/json
+  /schools/{id}/users:
+    get:
+      description: "Returns the staff, student, and/or teacher users for a school"
+      operationId: Schools_getUsers
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: role
+        required: false
+        schema:
+          enum:
+          - staff
+          - student
+          - teacher
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: primary
+        required: false
+        schema:
+          enum:
+          - ""
+          - "true"
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: starting_after
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: ending_before
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsersResponse'
+          description: OK Response
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Entity Not Found
+          x-do-not-generate: true
+      tags:
+      - Schools
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--schools-id-users
+      x-accepts: application/json
+  /sections:
+    get:
+      description: Returns a list of sections
+      operationId: Sections_getList
+      parameters:
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: starting_after
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: ending_before
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: count
+        required: false
+        schema:
+          enum:
+          - ""
+          - "true"
+          - "false"
+          - undefined
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SectionsResponse'
+          description: OK Response
+      tags:
+      - Sections
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--sections
+      x-accepts: application/json
+  /sections/{id}:
+    get:
+      description: Returns a specific section
+      operationId: Sections_getSpecificSection
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SectionResponse'
+          description: OK Response
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Entity Not Found
+          x-do-not-generate: true
+      tags:
+      - Sections
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--sections-id
+      x-accepts: application/json
+  /sections/{id}/course:
+    get:
+      description: Returns the course for a section
+      operationId: Sections_getCourse
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CourseResponse'
+          description: OK Response
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Entity Not Found
+          x-do-not-generate: true
+      tags:
+      - Sections
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--sections-id-course
+      x-accepts: application/json
+  /sections/{id}/district:
+    get:
+      description: Returns the district for a section
+      operationId: Sections_getDistrict
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DistrictResponse'
+          description: OK Response
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Entity Not Found
+          x-do-not-generate: true
+      tags:
+      - Sections
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--sections-id-district
+      x-accepts: application/json
+  /sections/{id}/resources:
+    get:
+      description: Returns the resources for a section
+      operationId: Sections_getResources
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: starting_after
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: ending_before
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourcesResponse'
+          description: OK Response
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Entity Not Found
+          x-do-not-generate: true
+      tags:
+      - Sections
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--sections-id-resources
+      x-accepts: application/json
+  /sections/{id}/school:
+    get:
+      description: Returns the school for a section
+      operationId: Sections_getSchool
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SchoolResponse'
+          description: OK Response
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Entity Not Found
+          x-do-not-generate: true
+      tags:
+      - Sections
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--sections-id-school
+      x-accepts: application/json
+  /sections/{id}/term:
+    get:
+      description: Returns the term for a section
+      operationId: Sections_getTerm
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TermResponse'
+          description: OK Response
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Entity Not Found
+          x-do-not-generate: true
+      tags:
+      - Sections
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--sections-id-term
+      x-accepts: application/json
+  /sections/{id}/users:
+    get:
+      description: Returns the student and/or teacher users for a section
+      operationId: Sections_getUsers
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: role
+        required: false
+        schema:
+          enum:
+          - student
+          - teacher
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: starting_after
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: ending_before
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsersResponse'
+          description: OK Response
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Entity Not Found
+          x-do-not-generate: true
+      tags:
+      - Sections
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--sections-id-users
+      x-accepts: application/json
+  /terms:
+    get:
+      description: Returns a list of terms
+      operationId: Terms_getList
+      parameters:
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: starting_after
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: ending_before
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: count
+        required: false
+        schema:
+          enum:
+          - ""
+          - "true"
+          - "false"
+          - undefined
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TermsResponse'
+          description: OK Response
+      tags:
+      - Terms
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--terms
+      x-accepts: application/json
+  /terms/{id}:
+    get:
+      description: Returns a specific term
+      operationId: Terms_getSpecificTerm
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TermResponse'
+          description: OK Response
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Entity Not Found
+          x-do-not-generate: true
+      tags:
+      - Terms
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--terms-id
+      x-accepts: application/json
+  /terms/{id}/district:
+    get:
+      description: Returns the district for a term
+      operationId: Terms_getDistrictById
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DistrictResponse'
+          description: OK Response
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Entity Not Found
+          x-do-not-generate: true
+      tags:
+      - Terms
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--terms-id-district
+      x-accepts: application/json
+  /terms/{id}/schools:
+    get:
+      description: Returns the schools for a term
+      operationId: Terms_getSchoolsForTerm
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: starting_after
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: ending_before
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SchoolsResponse'
+          description: OK Response
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Entity Not Found
+          x-do-not-generate: true
+      tags:
+      - Terms
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--terms-id-schools
+      x-accepts: application/json
+  /terms/{id}/sections:
+    get:
+      description: Returns the sections for a term
+      operationId: Terms_getSections
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: starting_after
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: ending_before
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SectionsResponse'
+          description: OK Response
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Entity Not Found
+          x-do-not-generate: true
+      tags:
+      - Terms
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--terms-id-sections
+      x-accepts: application/json
+  /users:
+    get:
+      description: "Returns a list of contact, district admin, staff, student, and/or\
+        \ teacher users"
+      operationId: Users_getList
+      parameters:
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: role
+        required: false
+        schema:
+          enum:
+          - contact
+          - district_admin
+          - staff
+          - student
+          - teacher
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: starting_after
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: ending_before
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: count
+        required: false
+        schema:
+          enum:
+          - ""
+          - "true"
+          - "false"
+          - undefined
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsersResponse'
+          description: OK Response
+      tags:
+      - Users
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--users
+      x-accepts: application/json
+  /users/{id}:
+    get:
+      description: Returns a specific user
+      operationId: Users_getUserById
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+          description: OK Response
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Entity Not Found
+          x-do-not-generate: true
+      tags:
+      - Users
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--users-id
+      x-accepts: application/json
+  /users/{id}/district:
+    get:
+      description: Returns the district for a user
+      operationId: Users_getDistrict
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DistrictResponse'
+          description: OK Response
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Entity Not Found
+          x-do-not-generate: true
+      tags:
+      - Users
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--users-id-district
+      x-accepts: application/json
+  /users/{id}/mycontacts:
+    get:
+      description: Returns the contact users for a student user
+      operationId: Users_getMyContacts
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: starting_after
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: ending_before
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsersResponse'
+          description: OK Response
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Entity Not Found
+          x-do-not-generate: true
+      tags:
+      - Users
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--users-id-mycontacts
+      x-accepts: application/json
+  /users/{id}/mystudents:
+    get:
+      description: Returns the student users for a teacher or contact user
+      operationId: Users_getStudentUsers
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: starting_after
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: ending_before
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsersResponse'
+          description: OK Response
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Entity Not Found
+          x-do-not-generate: true
+      tags:
+      - Users
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--users-id-mystudents
+      x-accepts: application/json
+  /users/{id}/myteachers:
+    get:
+      description: Returns the teacher users for a student user
+      operationId: Users_getTeachersForUser
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: starting_after
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: ending_before
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsersResponse'
+          description: OK Response
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Entity Not Found
+          x-do-not-generate: true
+      tags:
+      - Users
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--users-id-myteachers
+      x-accepts: application/json
+  /users/{id}/resources:
+    get:
+      description: Returns the resources for a user
+      operationId: Users_getResources
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: starting_after
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: ending_before
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourcesResponse'
+          description: OK Response
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Entity Not Found
+          x-do-not-generate: true
+      tags:
+      - Users
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--users-id-resources
+      x-accepts: application/json
+  /users/{id}/schools:
+    get:
+      description: Returns the schools for a user
+      operationId: Users_getSchools
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: primary
+        required: false
+        schema:
+          enum:
+          - ""
+          - "true"
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: starting_after
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: ending_before
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SchoolsResponse'
+          description: OK Response
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Entity Not Found
+          x-do-not-generate: true
+      tags:
+      - Users
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--users-id-schools
+      x-accepts: application/json
+  /users/{id}/sections:
+    get:
+      description: Returns the sections for a user
+      operationId: Users_getSections
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: starting_after
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: ending_before
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SectionsResponse'
+          description: OK Response
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Entity Not Found
+          x-do-not-generate: true
+      tags:
+      - Users
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--users-id-sections
+      x-accepts: application/json
+components:
+  responses:
+    BadRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BadRequest'
+      description: Bad Request
+    InternalError:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InternalError'
+      description: Internal Error
+    NotFound:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/NotFound'
+      description: Entity Not Found
+      x-do-not-generate: true
+  schemas:
+    BadRequest:
+      properties:
+        message:
+          type: string
+      type: object
+    Contact:
+      example:
+        phone_type: Cell
+        phone: phone
+        sis_id: sis_id
+        legacy_id: legacy_id
+        student_relationships:
+        - student: student
+          relationship: Parent
+          type: Parent/Guardian
+        - student: student
+          relationship: Parent
+          type: Parent/Guardian
+      properties:
+        legacy_id:
+          type: string
+          x-validation: true
+        phone:
+          nullable: true
+          type: string
+        phone_type:
+          enum:
+          - Cell
+          - Home
+          - Work
+          - Other
+          - ""
+          nullable: true
+          type: string
+          x-validation: true
+        sis_id:
+          nullable: true
+          type: string
+        student_relationships:
+          items:
+            $ref: '#/components/schemas/StudentRelationship'
+          type: array
+          x-validation: true
+      type: object
+    Course:
+      example:
+        number: number
+        district: district
+        name: name
+        id: id
+      properties:
+        district:
+          type: string
+          x-validation: true
+        id:
+          type: string
+          x-validation: true
+        name:
+          nullable: true
+          type: string
+        number:
+          nullable: true
+          type: string
+      type: object
+    CourseResponse:
+      example:
+        data:
+          number: number
+          district: district
+          name: name
+          id: id
+      properties:
+        data:
+          $ref: '#/components/schemas/Course'
+      type: object
+      x-konfig-is-used-in-successful-response: true
+    CoursesResponse:
+      example:
+        data:
+        - data:
+            number: number
+            district: district
+            name: name
+            id: id
+        - data:
+            number: number
+            district: district
+            name: name
+            id: id
+        links:
+        - rel: next
+          uri: uri
+        - rel: next
+          uri: uri
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/CourseResponse'
+          type: array
+        links:
+          items:
+            $ref: '#/components/schemas/Link'
+          type: array
+      type: object
+      x-konfig-is-used-in-successful-response: true
+    Credentials:
+      example:
+        district_username: district_username
+      properties:
+        district_username:
+          type: string
+      type: object
+    Disability:
+      example:
+        disability_type: Autism
+        disability_status: "Y"
+        disability_code: aut
+      properties:
+        disability_code:
+          enum:
+          - aut
+          - db
+          - dd
+          - emn
+          - hi
+          - id
+          - md
+          - oi
+          - other
+          - ohi
+          - sld
+          - sli
+          - tbi
+          - vi
+          nullable: true
+          type: string
+        disability_status:
+          enum:
+          - "Y"
+          - "N"
+          - ""
+          nullable: true
+          type: string
+        disability_type:
+          enum:
+          - Autism
+          - Deaf-blindness
+          - Developmental delay
+          - Emotional disturbance
+          - Hearing impairment
+          - Intellectual Disability
+          - Multiple disabilities
+          - Orthopedic impairment
+          - Other
+          - Other health impairment
+          - Specific learning disability
+          - Speech or language impairment
+          - Traumatic brain injury
+          - Visual impairment
+          nullable: true
+          type: string
+      type: object
+    District:
+      example:
+        login_methods:
+        - login_methods
+        - login_methods
+        mdr_number: mdr_number
+        last_sync: last_sync
+        pause_end: pause_end
+        error: error
+        nces_id: nces_id
+        pause_start: pause_start
+        lms_state: matching_in_progress
+        portal_url: portal_url
+        name: name
+        sis_type: sis_type
+        id: id
+        launch_date: 2000-01-23
+        state: running
+        district_contact:
+          district: district
+          name:
+            middle: middle
+            last: last
+            first: first
+          id: id
+          title: title
+          email: email
+      properties:
+        district_contact:
+          $ref: '#/components/schemas/DistrictContact'
+        error:
+          type: string
+        id:
+          type: string
+          x-validation: true
+        last_sync:
+          format: datetime
+          nullable: true
+          type: string
+          x-validation: true
+        launch_date:
+          format: date
+          type: string
+          x-validation: true
+        lms_state:
+          enum:
+          - matching_in_progress
+          - error
+          - disconnected
+          - ""
+          - success
+          nullable: true
+          type: string
+          x-validation: true
+        login_methods:
+          items:
+            type: string
+          type: array
+          x-validation: true
+        mdr_number:
+          nullable: true
+          type: string
+        name:
+          type: string
+        nces_id:
+          nullable: true
+          type: string
+        pause_end:
+          format: datetime
+          nullable: true
+          type: string
+          x-validation: true
+        pause_start:
+          format: datetime
+          nullable: true
+          type: string
+          x-validation: true
+        portal_url:
+          type: string
+        sis_type:
+          type: string
+          x-validation: true
+        state:
+          enum:
+          - running
+          - pending
+          - error
+          - paused
+          - ""
+          - success
+          nullable: true
+          type: string
+          x-validation: true
+      type: object
+    DistrictAdmin:
+      example:
+        legacy_id: legacy_id
+        title: title
+      properties:
+        title:
+          nullable: true
+          type: string
+        legacy_id:
+          type: string
+          x-validation: true
+      type: object
+    DistrictContact:
+      example:
+        district: district
+        name:
+          middle: middle
+          last: last
+          first: first
+        id: id
+        title: title
+        email: email
+      properties:
+        title:
+          type: string
+          x-validation: true
+        district:
+          type: string
+          x-validation: true
+        email:
+          nullable: true
+          type: string
+        id:
+          type: string
+          x-validation: true
+        name:
+          $ref: '#/components/schemas/Name'
+      type: object
+    DistrictResponse:
+      example:
+        data:
+          login_methods:
+          - login_methods
+          - login_methods
+          mdr_number: mdr_number
+          last_sync: last_sync
+          pause_end: pause_end
+          error: error
+          nces_id: nces_id
+          pause_start: pause_start
+          lms_state: matching_in_progress
+          portal_url: portal_url
+          name: name
+          sis_type: sis_type
+          id: id
+          launch_date: 2000-01-23
+          state: running
+          district_contact:
+            district: district
+            name:
+              middle: middle
+              last: last
+              first: first
+            id: id
+            title: title
+            email: email
+      properties:
+        data:
+          $ref: '#/components/schemas/District'
+      type: object
+      x-konfig-is-used-in-successful-response: true
+    DistrictsResponse:
+      example:
+        data:
+        - data:
+            login_methods:
+            - login_methods
+            - login_methods
+            mdr_number: mdr_number
+            last_sync: last_sync
+            pause_end: pause_end
+            error: error
+            nces_id: nces_id
+            pause_start: pause_start
+            lms_state: matching_in_progress
+            portal_url: portal_url
+            name: name
+            sis_type: sis_type
+            id: id
+            launch_date: 2000-01-23
+            state: running
+            district_contact:
+              district: district
+              name:
+                middle: middle
+                last: last
+                first: first
+              id: id
+              title: title
+              email: email
+        - data:
+            login_methods:
+            - login_methods
+            - login_methods
+            mdr_number: mdr_number
+            last_sync: last_sync
+            pause_end: pause_end
+            error: error
+            nces_id: nces_id
+            pause_start: pause_start
+            lms_state: matching_in_progress
+            portal_url: portal_url
+            name: name
+            sis_type: sis_type
+            id: id
+            launch_date: 2000-01-23
+            state: running
+            district_contact:
+              district: district
+              name:
+                middle: middle
+                last: last
+                first: first
+              id: id
+              title: title
+              email: email
+        links:
+        - rel: next
+          uri: uri
+        - rel: next
+          uri: uri
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/DistrictResponse'
+          type: array
+        links:
+          items:
+            $ref: '#/components/schemas/Link'
+          type: array
+      type: object
+      x-konfig-is-used-in-successful-response: true
+    InternalError:
+      properties:
+        message:
+          type: string
+      type: object
+    Link:
+      example:
+        rel: next
+        uri: uri
+      properties:
+        rel:
+          enum:
+          - next
+          - prev
+          - self
+          type: string
+        uri:
+          type: string
+      type: object
+    Location:
+      example:
+        zip: zip
+        address: address
+        city: city
+        lon: lon
+        state: state
+        lat: lat
+      properties:
+        address:
+          nullable: true
+          type: string
+        city:
+          nullable: true
+          type: string
+        lat:
+          nullable: true
+          type: string
+        lon:
+          nullable: true
+          type: string
+        state:
+          nullable: true
+          type: string
+        zip:
+          nullable: true
+          type: string
+      type: object
+    Name:
+      example:
+        middle: middle
+        last: last
+        first: first
+      properties:
+        first:
+          nullable: true
+          type: string
+        last:
+          nullable: true
+          type: string
+        middle:
+          nullable: true
+          type: string
+      type: object
+    NotFound:
+      properties:
+        message:
+          type: string
+      type: object
+      x-konfig-is-used-in-non-successful-response: true
+      x-do-not-generate: true
+    PreferredName:
+      example:
+        middle: middle
+        last: last
+        first: first
+      properties:
+        first:
+          nullable: true
+          type: string
+        last:
+          nullable: true
+          type: string
+        middle:
+          nullable: true
+          type: string
+      type: object
+    Principal:
+      example:
+        name: name
+        email: email
+      properties:
+        email:
+          nullable: true
+          type: string
+        name:
+          nullable: true
+          type: string
+      type: object
+    Resource:
+      example:
+        created: 2000-01-23T04:56:07.000+00:00
+        district: district
+        roles:
+        - teacher
+        - teacher
+        resource_id: resource_id
+        id: id
+        title: title
+        updated: 2000-01-23T04:56:07.000+00:00
+      properties:
+        title:
+          type: string
+        created:
+          format: date-time
+          type: string
+        district:
+          type: string
+        id:
+          type: string
+        resource_id:
+          type: string
+        roles:
+          items:
+            enum:
+            - teacher
+            - student
+            type: string
+          type: array
+        updated:
+          format: date-time
+          type: string
+      type: object
+    ResourceResponse:
+      example:
+        data:
+          created: 2000-01-23T04:56:07.000+00:00
+          district: district
+          roles:
+          - teacher
+          - teacher
+          resource_id: resource_id
+          id: id
+          title: title
+          updated: 2000-01-23T04:56:07.000+00:00
+      properties:
+        data:
+          $ref: '#/components/schemas/Resource'
+      type: object
+      x-konfig-is-used-in-successful-response: true
+    ResourcesResponse:
+      example:
+        data:
+        - data:
+            created: 2000-01-23T04:56:07.000+00:00
+            district: district
+            roles:
+            - teacher
+            - teacher
+            resource_id: resource_id
+            id: id
+            title: title
+            updated: 2000-01-23T04:56:07.000+00:00
+        - data:
+            created: 2000-01-23T04:56:07.000+00:00
+            district: district
+            roles:
+            - teacher
+            - teacher
+            resource_id: resource_id
+            id: id
+            title: title
+            updated: 2000-01-23T04:56:07.000+00:00
+        links:
+        - rel: next
+          uri: uri
+        - rel: next
+          uri: uri
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/ResourceResponse'
+          type: array
+        links:
+          items:
+            $ref: '#/components/schemas/Link'
+          type: array
+      type: object
+      x-konfig-is-used-in-successful-response: true
+    Roles:
+      example:
+        district_admin:
+          legacy_id: legacy_id
+          title: title
+        teacher:
+          ext: "{}"
+          credentials:
+            district_username: district_username
+          created: created
+          sis_id: sis_id
+          title: title
+          teacher_number: teacher_number
+          school: school
+          schools:
+          - schools
+          - schools
+          district: district
+          name:
+            middle: middle
+            last: last
+            first: first
+          legacy_id: legacy_id
+          state_id: state_id
+          last_modified: last_modified
+        student:
+          gender: M
+          credentials:
+            district_username: district_username
+          disability:
+            disability_type: Autism
+            disability_status: "Y"
+            disability_code: aut
+          sis_id: sis_id
+          frl_status: Free
+          gifted_status: "Y"
+          school: school
+          ell_status: "Y"
+          legacy_id: legacy_id
+          state_id: state_id
+          iep_status: iep_status
+          last_modified: last_modified
+          home_language_code: hau
+          ext: "{}"
+          race: Caucasian
+          created: created
+          graduation_year: graduation_year
+          home_language: Basque
+          enrollments:
+          - end_date: end_date
+            school: school
+            start_date: start_date
+          - end_date: end_date
+            school: school
+            start_date: start_date
+          hispanic_ethnicity: "Y"
+          section_504_status: "Y"
+          student_number: student_number
+          schools:
+          - schools
+          - schools
+          dob: dob
+          grade: InfantToddler
+          location:
+            zip: zip
+            address: address
+            city: city
+            lon: lon
+            state: state
+            lat: lat
+          preferred_name:
+            middle: middle
+            last: last
+            first: first
+        contact:
+          phone_type: Cell
+          phone: phone
+          sis_id: sis_id
+          legacy_id: legacy_id
+          student_relationships:
+          - student: student
+            relationship: Parent
+            type: Parent/Guardian
+          - student: student
+            relationship: Parent
+            type: Parent/Guardian
+        staff:
+          ext: "{}"
+          credentials:
+            district_username: district_username
+          schools:
+          - schools
+          - schools
+          roles:
+          - roles
+          - roles
+          staff_id: staff_id
+          legacy_id: legacy_id
+          title: title
+          department: department
+      properties:
+        contact:
+          $ref: '#/components/schemas/Contact'
+        district_admin:
+          $ref: '#/components/schemas/DistrictAdmin'
+        staff:
+          $ref: '#/components/schemas/Staff'
+        student:
+          $ref: '#/components/schemas/Student'
+        teacher:
+          $ref: '#/components/schemas/Teacher'
+    School:
+      example:
+        ext: "{}"
+        mdr_number: mdr_number
+        created: created
+        sis_id: sis_id
+        low_grade: InfantToddler
+        principal:
+          name: name
+          email: email
+        nces_id: nces_id
+        phone: phone
+        district: district
+        school_number: school_number
+        name: name
+        location:
+          zip: zip
+          address: address
+          city: city
+          lon: lon
+          state: state
+          lat: lat
+        id: id
+        state_id: state_id
+        last_modified: last_modified
+        high_grade: InfantToddler
+      properties:
+        created:
+          format: datetime
+          type: string
+          x-validation: true
+        district:
+          type: string
+          x-validation: true
+        ext:
+          type: object
+        high_grade:
+          enum:
+          - InfantToddler
+          - Preschool
+          - PreKindergarten
+          - TransitionalKindergarten
+          - Kindergarten
+          - "1"
+          - "2"
+          - "3"
+          - "4"
+          - "5"
+          - "6"
+          - "7"
+          - "8"
+          - "9"
+          - "10"
+          - "11"
+          - "12"
+          - "13"
+          - PostGraduate
+          - Ungraded
+          - Other
+          - ""
+          nullable: true
+          type: string
+          x-validation: true
+        id:
+          type: string
+          x-validation: true
+        last_modified:
+          format: datetime
+          type: string
+          x-validation: true
+        location:
+          $ref: '#/components/schemas/Location'
+        low_grade:
+          enum:
+          - InfantToddler
+          - Preschool
+          - PreKindergarten
+          - TransitionalKindergarten
+          - Kindergarten
+          - "1"
+          - "2"
+          - "3"
+          - "4"
+          - "5"
+          - "6"
+          - "7"
+          - "8"
+          - "9"
+          - "10"
+          - "11"
+          - "12"
+          - "13"
+          - PostGraduate
+          - Ungraded
+          - Other
+          - ""
+          nullable: true
+          type: string
+          x-validation: true
+        mdr_number:
+          nullable: true
+          type: string
+        name:
+          type: string
+        nces_id:
+          nullable: true
+          type: string
+        phone:
+          nullable: true
+          type: string
+        principal:
+          $ref: '#/components/schemas/Principal'
+        school_number:
+          type: string
+        sis_id:
+          type: string
+        state_id:
+          nullable: true
+          type: string
+      type: object
+    SchoolEnrollment:
+      example:
+        end_date: end_date
+        school: school
+        start_date: start_date
+      properties:
+        end_date:
+          format: datetime
+          type: string
+          x-validation: true
+        school:
+          type: string
+          x-validation: true
+        start_date:
+          format: datetime
+          type: string
+          x-validation: true
+      type: object
+    SchoolResponse:
+      example:
+        data:
+          ext: "{}"
+          mdr_number: mdr_number
+          created: created
+          sis_id: sis_id
+          low_grade: InfantToddler
+          principal:
+            name: name
+            email: email
+          nces_id: nces_id
+          phone: phone
+          district: district
+          school_number: school_number
+          name: name
+          location:
+            zip: zip
+            address: address
+            city: city
+            lon: lon
+            state: state
+            lat: lat
+          id: id
+          state_id: state_id
+          last_modified: last_modified
+          high_grade: InfantToddler
+      properties:
+        data:
+          $ref: '#/components/schemas/School'
+      type: object
+      x-konfig-is-used-in-successful-response: true
+    SchoolsResponse:
+      example:
+        data:
+        - data:
+            ext: "{}"
+            mdr_number: mdr_number
+            created: created
+            sis_id: sis_id
+            low_grade: InfantToddler
+            principal:
+              name: name
+              email: email
+            nces_id: nces_id
+            phone: phone
+            district: district
+            school_number: school_number
+            name: name
+            location:
+              zip: zip
+              address: address
+              city: city
+              lon: lon
+              state: state
+              lat: lat
+            id: id
+            state_id: state_id
+            last_modified: last_modified
+            high_grade: InfantToddler
+        - data:
+            ext: "{}"
+            mdr_number: mdr_number
+            created: created
+            sis_id: sis_id
+            low_grade: InfantToddler
+            principal:
+              name: name
+              email: email
+            nces_id: nces_id
+            phone: phone
+            district: district
+            school_number: school_number
+            name: name
+            location:
+              zip: zip
+              address: address
+              city: city
+              lon: lon
+              state: state
+              lat: lat
+            id: id
+            state_id: state_id
+            last_modified: last_modified
+            high_grade: InfantToddler
+        links:
+        - rel: next
+          uri: uri
+        - rel: next
+          uri: uri
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/SchoolResponse'
+          type: array
+        links:
+          items:
+            $ref: '#/components/schemas/Link'
+          type: array
+      type: object
+      x-konfig-is-used-in-successful-response: true
+    Section:
+      example:
+        ext: "{}"
+        period: period
+        created: created
+        subject: english/language arts
+        sis_id: sis_id
+        students:
+        - students
+        - students
+        term_id: term_id
+        teacher: teacher
+        school: school
+        teachers:
+        - teachers
+        - teachers
+        district: district
+        grade: InfantToddler
+        name: name
+        course: course
+        id: id
+        last_modified: last_modified
+        section_number: section_number
+      properties:
+        course:
+          nullable: true
+          type: string
+          x-validation: true
+        created:
+          format: datetime
+          type: string
+          x-validation: true
+        district:
+          type: string
+          x-validation: true
+        ext:
+          type: object
+        grade:
+          enum:
+          - InfantToddler
+          - Preschool
+          - PreKindergarten
+          - TransitionalKindergarten
+          - Kindergarten
+          - "1"
+          - "2"
+          - "3"
+          - "4"
+          - "5"
+          - "6"
+          - "7"
+          - "8"
+          - "9"
+          - "10"
+          - "11"
+          - "12"
+          - "13"
+          - PostGraduate
+          - Ungraded
+          - Other
+          - ""
+          nullable: true
+          type: string
+          x-validation: true
+        id:
+          type: string
+          x-validation: true
+        last_modified:
+          format: datetime
+          type: string
+          x-validation: true
+        name:
+          type: string
+        period:
+          nullable: true
+          type: string
+        school:
+          type: string
+          x-validation: true
+        section_number:
+          nullable: true
+          type: string
+        sis_id:
+          type: string
+        students:
+          items:
+            type: string
+          type: array
+          x-validation: true
+        subject:
+          enum:
+          - english/language arts
+          - math
+          - science
+          - social studies
+          - language
+          - homeroom/advisory
+          - interventions/online learning
+          - technology and engineering
+          - PE and health
+          - arts and music
+          - other
+          - ""
+          nullable: true
+          type: string
+          x-validation: true
+        teacher:
+          nullable: true
+          type: string
+          x-validation: true
+        teachers:
+          items:
+            type: string
+          type: array
+          x-validation: true
+        term_id:
+          nullable: true
+          type: string
+          x-validation: true
+      type: object
+    SectionResponse:
+      example:
+        data:
+          ext: "{}"
+          period: period
+          created: created
+          subject: english/language arts
+          sis_id: sis_id
+          students:
+          - students
+          - students
+          term_id: term_id
+          teacher: teacher
+          school: school
+          teachers:
+          - teachers
+          - teachers
+          district: district
+          grade: InfantToddler
+          name: name
+          course: course
+          id: id
+          last_modified: last_modified
+          section_number: section_number
+      properties:
+        data:
+          $ref: '#/components/schemas/Section'
+      type: object
+      x-konfig-is-used-in-successful-response: true
+    SectionsResponse:
+      example:
+        data:
+        - data:
+            ext: "{}"
+            period: period
+            created: created
+            subject: english/language arts
+            sis_id: sis_id
+            students:
+            - students
+            - students
+            term_id: term_id
+            teacher: teacher
+            school: school
+            teachers:
+            - teachers
+            - teachers
+            district: district
+            grade: InfantToddler
+            name: name
+            course: course
+            id: id
+            last_modified: last_modified
+            section_number: section_number
+        - data:
+            ext: "{}"
+            period: period
+            created: created
+            subject: english/language arts
+            sis_id: sis_id
+            students:
+            - students
+            - students
+            term_id: term_id
+            teacher: teacher
+            school: school
+            teachers:
+            - teachers
+            - teachers
+            district: district
+            grade: InfantToddler
+            name: name
+            course: course
+            id: id
+            last_modified: last_modified
+            section_number: section_number
+        links:
+        - rel: next
+          uri: uri
+        - rel: next
+          uri: uri
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/SectionResponse'
+          type: array
+        links:
+          items:
+            $ref: '#/components/schemas/Link'
+          type: array
+      type: object
+      x-konfig-is-used-in-successful-response: true
+    Staff:
+      example:
+        ext: "{}"
+        credentials:
+          district_username: district_username
+        schools:
+        - schools
+        - schools
+        roles:
+        - roles
+        - roles
+        staff_id: staff_id
+        legacy_id: legacy_id
+        title: title
+        department: department
+      properties:
+        title:
+          nullable: true
+          type: string
+        credentials:
+          $ref: '#/components/schemas/Credentials'
+        department:
+          nullable: true
+          type: string
+        ext:
+          type: object
+        legacy_id:
+          type: string
+          x-validation: true
+        roles:
+          items:
+            type: string
+          type: array
+          x-validation: true
+        schools:
+          items:
+            type: string
+          type: array
+          x-validation: true
+        staff_id:
+          type: string
+      type: object
+    Student:
+      example:
+        gender: M
+        credentials:
+          district_username: district_username
+        disability:
+          disability_type: Autism
+          disability_status: "Y"
+          disability_code: aut
+        sis_id: sis_id
+        frl_status: Free
+        gifted_status: "Y"
+        school: school
+        ell_status: "Y"
+        legacy_id: legacy_id
+        state_id: state_id
+        iep_status: iep_status
+        last_modified: last_modified
+        home_language_code: hau
+        ext: "{}"
+        race: Caucasian
+        created: created
+        graduation_year: graduation_year
+        home_language: Basque
+        enrollments:
+        - end_date: end_date
+          school: school
+          start_date: start_date
+        - end_date: end_date
+          school: school
+          start_date: start_date
+        hispanic_ethnicity: "Y"
+        section_504_status: "Y"
+        student_number: student_number
+        schools:
+        - schools
+        - schools
+        dob: dob
+        grade: InfantToddler
+        location:
+          zip: zip
+          address: address
+          city: city
+          lon: lon
+          state: state
+          lat: lat
+        preferred_name:
+          middle: middle
+          last: last
+          first: first
+      properties:
+        created:
+          format: datetime
+          type: string
+          x-validation: true
+        credentials:
+          $ref: '#/components/schemas/Credentials'
+        disability:
+          $ref: '#/components/schemas/Disability'
+        dob:
+          nullable: true
+          pattern: "(?:[0-9]{1,2})/([0-9]{1,2})/([0-9]{4})"
+          type: string
+          x-validation: true
+        ell_status:
+          enum:
+          - "Y"
+          - "N"
+          - ""
+          nullable: true
+          type: string
+          x-validation: true
+        enrollments:
+          items:
+            $ref: '#/components/schemas/SchoolEnrollment'
+          type: array
+          x-validation: true
+        ext:
+          type: object
+        frl_status:
+          enum:
+          - Free
+          - Reduced
+          - Paid
+          - Other
+          - ""
+          nullable: true
+          type: string
+          x-validation: true
+        gender:
+          enum:
+          - M
+          - F
+          - X
+          - ""
+          nullable: true
+          type: string
+          x-validation: true
+        gifted_status:
+          enum:
+          - "Y"
+          - "N"
+          - ""
+          nullable: true
+          type: string
+          x-validation: true
+        grade:
+          enum:
+          - InfantToddler
+          - Preschool
+          - PreKindergarten
+          - TransitionalKindergarten
+          - Kindergarten
+          - "1"
+          - "2"
+          - "3"
+          - "4"
+          - "5"
+          - "6"
+          - "7"
+          - "8"
+          - "9"
+          - "10"
+          - "11"
+          - "12"
+          - "13"
+          - PostGraduate
+          - Ungraded
+          - Other
+          - ""
+          nullable: true
+          type: string
+          x-validation: true
+        graduation_year:
+          nullable: true
+          type: string
+          x-validation: true
+        hispanic_ethnicity:
+          enum:
+          - "Y"
+          - "N"
+          - ""
+          nullable: true
+          type: string
+          x-validation: true
+        home_language:
+          enum:
+          - Basque
+          - Portuguese
+          - Hungarian
+          - Hmong
+          - Urdu
+          - Latvian
+          - Hausa
+          - Slovenian
+          - Chinese (Mandarin)
+          - Russian
+          - Arabic
+          - Telugu
+          - Afrikaans
+          - Tamil
+          - Irish
+          - Uzbek
+          - Norwegian
+          - Serbian
+          - Khmer
+          - Farsi
+          - Lao
+          - Gujarati
+          - Yiddish
+          - Lithuanian
+          - Mongolian
+          - Samoan
+          - Bengali
+          - Corsican
+          - Romanian
+          - Javanese
+          - Danish
+          - Scots Gaelic
+          - Burmese
+          - Kinyarwanda
+          - Swahili
+          - Yoruba
+          - Uyghur
+          - Hindi
+          - Azerbaijani
+          - Cabo Verdean
+          - Haitian Creole
+          - Amharic
+          - Maori
+          - Somali
+          - English
+          - Hawaiian
+          - Maltese
+          - Thai
+          - Slovak
+          - Nepali
+          - Bosnian
+          - Marathi
+          - Frisian
+          - Swedish
+          - Kazakh
+          - German
+          - Turkish
+          - Chinese
+          - Luxembourgish
+          - Armenian
+          - Dari
+          - Macedonian
+          - Karen
+          - Iloko
+          - Igbo
+          - Kannada
+          - Galician
+          - Cebuano
+          - Punjabi
+          - Indonesian
+          - Estonian
+          - Odia
+          - Spanish
+          - Filipino
+          - Albanian
+          - Korean
+          - Croatian
+          - Japanese
+          - Bulgarian
+          - Catalan
+          - Polish
+          - Sinhala
+          - Other
+          - Icelandic
+          - Tatar
+          - Ukrainian
+          - Tajik
+          - Italian
+          - French
+          - Malayalam
+          - Chichewa
+          - Kurdish (Kurmanji)
+          - Czech
+          - Xhosa
+          - Hebrew
+          - Georgian
+          - Oromo
+          - Shona
+          - Sindhi
+          - Sesotho
+          - Tagalog
+          - Malagasy
+          - Tigrinya
+          - Welsh
+          - Turkmen
+          - Malay
+          - Marshallese
+          - Belarusian
+          - Dutch
+          - Finnish
+          - Greek
+          - Kyrgyz
+          - Zulu
+          - Sundanese
+          - Vietnamese
+          - Pashto
+          nullable: true
+          type: string
+          x-validation: true
+        home_language_code:
+          enum:
+          - hau
+          - ilo
+          - dan
+          - som
+          - xho
+          - slv
+          - bos
+          - cos
+          - ces
+          - mlg
+          - vie
+          - bel
+          - hin
+          - hun
+          - mon
+          - pan
+          - tgk
+          - heb
+          - prs
+          - mlt
+          - pus
+          - tir
+          - eng
+          - mar
+          - nld
+          - est
+          - zho
+          - fas
+          - fry
+          - jpn
+          - aze
+          - rus
+          - gla
+          - yor
+          - cmn
+          - bul
+          - fin
+          - hmn
+          - ita
+          - pol
+          - ara
+          - ell
+          - khm
+          - mkd
+          - cpp
+          - ibo
+          - urd
+          - cym
+          - hat
+          - lao
+          - ltz
+          - snd
+          - swa
+          - mya
+          - ori
+          - kat
+          - smo
+          - spa
+          - kor
+          - nob
+          - ron
+          - tha
+          - ind
+          - fra
+          - tel
+          - hye
+          - guj
+          - isl
+          - msa
+          - slk
+          - swe
+          - tuk
+          - eus
+          - kaz
+          - mal
+          - kan
+          - amh
+          - orm
+          - afr
+          - fil
+          - haw
+          - lav
+          - sin
+          - yid
+          - ben
+          - kir
+          - mri
+          - tam
+          - glg
+          - ceb
+          - tat
+          - zul
+          - lit
+          - nep
+          - por
+          - sot
+          - other
+          - nya
+          - sun
+          - cat
+          - tgl
+          - ukr
+          - uzb
+          - gle
+          - srp
+          - deu
+          - jav
+          - kur
+          - mah
+          - sna
+          - uig
+          - kin
+          - hrv
+          - kar
+          - tur
+          - sqi
+          nullable: true
+          type: string
+          x-validation: true
+        iep_status:
+          nullable: true
+          type: string
+        last_modified:
+          format: datetime
+          type: string
+          x-validation: true
+        legacy_id:
+          type: string
+          x-validation: true
+        location:
+          $ref: '#/components/schemas/Location'
+        preferred_name:
+          $ref: '#/components/schemas/PreferredName'
+        race:
+          enum:
+          - Caucasian
+          - Asian
+          - Black or African American
+          - American Indian
+          - Hawaiian or Other Pacific Islander
+          - Two or More Races
+          - Unknown
+          - ""
+          nullable: true
+          type: string
+          x-validation: true
+        school:
+          type: string
+          x-validation: true
+        schools:
+          items:
+            type: string
+          type: array
+          x-validation: true
+        section_504_status:
+          enum:
+          - "Y"
+          - "N"
+          - ""
+          nullable: true
+          type: string
+          x-validation: true
+        sis_id:
+          type: string
+        state_id:
+          nullable: true
+          type: string
+        student_number:
+          nullable: true
+          type: string
+      type: object
+    StudentRelationship:
+      example:
+        student: student
+        relationship: Parent
+        type: Parent/Guardian
+      properties:
+        relationship:
+          enum:
+          - Parent
+          - Grandparent
+          - Self
+          - Aunt/Uncle
+          - Sibling
+          - Other
+          - ""
+          nullable: true
+          type: string
+          x-validation: true
+        student:
+          type: string
+          x-validation: true
+        type:
+          enum:
+          - Parent/Guardian
+          - Emergency
+          - Primary
+          - Secondary
+          - Family
+          - Other
+          - ""
+          nullable: true
+          type: string
+          x-validation: true
+      type: object
+    Teacher:
+      example:
+        ext: "{}"
+        credentials:
+          district_username: district_username
+        created: created
+        sis_id: sis_id
+        title: title
+        teacher_number: teacher_number
+        school: school
+        schools:
+        - schools
+        - schools
+        district: district
+        name:
+          middle: middle
+          last: last
+          first: first
+        legacy_id: legacy_id
+        state_id: state_id
+        last_modified: last_modified
+      properties:
+        title:
+          nullable: true
+          type: string
+        created:
+          format: datetime
+          type: string
+          x-validation: true
+        credentials:
+          $ref: '#/components/schemas/Credentials'
+        district:
+          type: string
+          x-validation: true
+        ext:
+          type: object
+        last_modified:
+          format: datetime
+          type: string
+          x-validation: true
+        legacy_id:
+          type: string
+          x-validation: true
+        name:
+          $ref: '#/components/schemas/Name'
+        school:
+          type: string
+          x-validation: true
+        schools:
+          items:
+            type: string
+          type: array
+          x-validation: true
+        sis_id:
+          type: string
+        state_id:
+          nullable: true
+          type: string
+        teacher_number:
+          nullable: true
+          type: string
+      type: object
+    Term:
+      example:
+        end_date: end_date
+        district: district
+        name: name
+        id: id
+        start_date: start_date
+      properties:
+        district:
+          type: string
+          x-validation: true
+        end_date:
+          format: datetime
+          nullable: true
+          type: string
+          x-validation: true
+        id:
+          type: string
+          x-validation: true
+        name:
+          nullable: true
+          type: string
+        start_date:
+          format: datetime
+          nullable: true
+          type: string
+          x-validation: true
+      type: object
+    TermResponse:
+      example:
+        data:
+          end_date: end_date
+          district: district
+          name: name
+          id: id
+          start_date: start_date
+      properties:
+        data:
+          $ref: '#/components/schemas/Term'
+      type: object
+      x-konfig-is-used-in-successful-response: true
+    TermsResponse:
+      example:
+        data:
+        - data:
+            end_date: end_date
+            district: district
+            name: name
+            id: id
+            start_date: start_date
+        - data:
+            end_date: end_date
+            district: district
+            name: name
+            id: id
+            start_date: start_date
+        links:
+        - rel: next
+          uri: uri
+        - rel: next
+          uri: uri
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/TermResponse'
+          type: array
+        links:
+          items:
+            $ref: '#/components/schemas/Link'
+          type: array
+      type: object
+      x-konfig-is-used-in-successful-response: true
+    User:
+      example:
+        created: created
+        district: district
+        roles:
+          district_admin:
+            legacy_id: legacy_id
+            title: title
+          teacher:
+            ext: "{}"
+            credentials:
+              district_username: district_username
+            created: created
+            sis_id: sis_id
+            title: title
+            teacher_number: teacher_number
+            school: school
+            schools:
+            - schools
+            - schools
+            district: district
+            name:
+              middle: middle
+              last: last
+              first: first
+            legacy_id: legacy_id
+            state_id: state_id
+            last_modified: last_modified
+          student:
+            gender: M
+            credentials:
+              district_username: district_username
+            disability:
+              disability_type: Autism
+              disability_status: "Y"
+              disability_code: aut
+            sis_id: sis_id
+            frl_status: Free
+            gifted_status: "Y"
+            school: school
+            ell_status: "Y"
+            legacy_id: legacy_id
+            state_id: state_id
+            iep_status: iep_status
+            last_modified: last_modified
+            home_language_code: hau
+            ext: "{}"
+            race: Caucasian
+            created: created
+            graduation_year: graduation_year
+            home_language: Basque
+            enrollments:
+            - end_date: end_date
+              school: school
+              start_date: start_date
+            - end_date: end_date
+              school: school
+              start_date: start_date
+            hispanic_ethnicity: "Y"
+            section_504_status: "Y"
+            student_number: student_number
+            schools:
+            - schools
+            - schools
+            dob: dob
+            grade: InfantToddler
+            location:
+              zip: zip
+              address: address
+              city: city
+              lon: lon
+              state: state
+              lat: lat
+            preferred_name:
+              middle: middle
+              last: last
+              first: first
+          contact:
+            phone_type: Cell
+            phone: phone
+            sis_id: sis_id
+            legacy_id: legacy_id
+            student_relationships:
+            - student: student
+              relationship: Parent
+              type: Parent/Guardian
+            - student: student
+              relationship: Parent
+              type: Parent/Guardian
+          staff:
+            ext: "{}"
+            credentials:
+              district_username: district_username
+            schools:
+            - schools
+            - schools
+            roles:
+            - roles
+            - roles
+            staff_id: staff_id
+            legacy_id: legacy_id
+            title: title
+            department: department
+        name:
+          middle: middle
+          last: last
+          first: first
+        id: id
+        last_modified: last_modified
+        email: email
+      properties:
+        created:
+          format: datetime
+          type: string
+          x-validation: true
+        district:
+          type: string
+          x-validation: true
+        email:
+          nullable: true
+          type: string
+        id:
+          type: string
+          x-validation: true
+        last_modified:
+          format: datetime
+          type: string
+          x-validation: true
+        name:
+          $ref: '#/components/schemas/Name'
+        roles:
+          $ref: '#/components/schemas/Roles'
+      type: object
+    UserResponse:
+      example:
+        data:
+          created: created
+          district: district
+          roles:
+            district_admin:
+              legacy_id: legacy_id
+              title: title
+            teacher:
+              ext: "{}"
+              credentials:
+                district_username: district_username
+              created: created
+              sis_id: sis_id
+              title: title
+              teacher_number: teacher_number
+              school: school
+              schools:
+              - schools
+              - schools
+              district: district
+              name:
+                middle: middle
+                last: last
+                first: first
+              legacy_id: legacy_id
+              state_id: state_id
+              last_modified: last_modified
+            student:
+              gender: M
+              credentials:
+                district_username: district_username
+              disability:
+                disability_type: Autism
+                disability_status: "Y"
+                disability_code: aut
+              sis_id: sis_id
+              frl_status: Free
+              gifted_status: "Y"
+              school: school
+              ell_status: "Y"
+              legacy_id: legacy_id
+              state_id: state_id
+              iep_status: iep_status
+              last_modified: last_modified
+              home_language_code: hau
+              ext: "{}"
+              race: Caucasian
+              created: created
+              graduation_year: graduation_year
+              home_language: Basque
+              enrollments:
+              - end_date: end_date
+                school: school
+                start_date: start_date
+              - end_date: end_date
+                school: school
+                start_date: start_date
+              hispanic_ethnicity: "Y"
+              section_504_status: "Y"
+              student_number: student_number
+              schools:
+              - schools
+              - schools
+              dob: dob
+              grade: InfantToddler
+              location:
+                zip: zip
+                address: address
+                city: city
+                lon: lon
+                state: state
+                lat: lat
+              preferred_name:
+                middle: middle
+                last: last
+                first: first
+            contact:
+              phone_type: Cell
+              phone: phone
+              sis_id: sis_id
+              legacy_id: legacy_id
+              student_relationships:
+              - student: student
+                relationship: Parent
+                type: Parent/Guardian
+              - student: student
+                relationship: Parent
+                type: Parent/Guardian
+            staff:
+              ext: "{}"
+              credentials:
+                district_username: district_username
+              schools:
+              - schools
+              - schools
+              roles:
+              - roles
+              - roles
+              staff_id: staff_id
+              legacy_id: legacy_id
+              title: title
+              department: department
+          name:
+            middle: middle
+            last: last
+            first: first
+          id: id
+          last_modified: last_modified
+          email: email
+      properties:
+        data:
+          $ref: '#/components/schemas/User'
+      type: object
+      x-konfig-is-used-in-successful-response: true
+    UsersResponse:
+      example:
+        data:
+        - data:
+            created: created
+            district: district
+            roles:
+              district_admin:
+                legacy_id: legacy_id
+                title: title
+              teacher:
+                ext: "{}"
+                credentials:
+                  district_username: district_username
+                created: created
+                sis_id: sis_id
+                title: title
+                teacher_number: teacher_number
+                school: school
+                schools:
+                - schools
+                - schools
+                district: district
+                name:
+                  middle: middle
+                  last: last
+                  first: first
+                legacy_id: legacy_id
+                state_id: state_id
+                last_modified: last_modified
+              student:
+                gender: M
+                credentials:
+                  district_username: district_username
+                disability:
+                  disability_type: Autism
+                  disability_status: "Y"
+                  disability_code: aut
+                sis_id: sis_id
+                frl_status: Free
+                gifted_status: "Y"
+                school: school
+                ell_status: "Y"
+                legacy_id: legacy_id
+                state_id: state_id
+                iep_status: iep_status
+                last_modified: last_modified
+                home_language_code: hau
+                ext: "{}"
+                race: Caucasian
+                created: created
+                graduation_year: graduation_year
+                home_language: Basque
+                enrollments:
+                - end_date: end_date
+                  school: school
+                  start_date: start_date
+                - end_date: end_date
+                  school: school
+                  start_date: start_date
+                hispanic_ethnicity: "Y"
+                section_504_status: "Y"
+                student_number: student_number
+                schools:
+                - schools
+                - schools
+                dob: dob
+                grade: InfantToddler
+                location:
+                  zip: zip
+                  address: address
+                  city: city
+                  lon: lon
+                  state: state
+                  lat: lat
+                preferred_name:
+                  middle: middle
+                  last: last
+                  first: first
+              contact:
+                phone_type: Cell
+                phone: phone
+                sis_id: sis_id
+                legacy_id: legacy_id
+                student_relationships:
+                - student: student
+                  relationship: Parent
+                  type: Parent/Guardian
+                - student: student
+                  relationship: Parent
+                  type: Parent/Guardian
+              staff:
+                ext: "{}"
+                credentials:
+                  district_username: district_username
+                schools:
+                - schools
+                - schools
+                roles:
+                - roles
+                - roles
+                staff_id: staff_id
+                legacy_id: legacy_id
+                title: title
+                department: department
+            name:
+              middle: middle
+              last: last
+              first: first
+            id: id
+            last_modified: last_modified
+            email: email
+        - data:
+            created: created
+            district: district
+            roles:
+              district_admin:
+                legacy_id: legacy_id
+                title: title
+              teacher:
+                ext: "{}"
+                credentials:
+                  district_username: district_username
+                created: created
+                sis_id: sis_id
+                title: title
+                teacher_number: teacher_number
+                school: school
+                schools:
+                - schools
+                - schools
+                district: district
+                name:
+                  middle: middle
+                  last: last
+                  first: first
+                legacy_id: legacy_id
+                state_id: state_id
+                last_modified: last_modified
+              student:
+                gender: M
+                credentials:
+                  district_username: district_username
+                disability:
+                  disability_type: Autism
+                  disability_status: "Y"
+                  disability_code: aut
+                sis_id: sis_id
+                frl_status: Free
+                gifted_status: "Y"
+                school: school
+                ell_status: "Y"
+                legacy_id: legacy_id
+                state_id: state_id
+                iep_status: iep_status
+                last_modified: last_modified
+                home_language_code: hau
+                ext: "{}"
+                race: Caucasian
+                created: created
+                graduation_year: graduation_year
+                home_language: Basque
+                enrollments:
+                - end_date: end_date
+                  school: school
+                  start_date: start_date
+                - end_date: end_date
+                  school: school
+                  start_date: start_date
+                hispanic_ethnicity: "Y"
+                section_504_status: "Y"
+                student_number: student_number
+                schools:
+                - schools
+                - schools
+                dob: dob
+                grade: InfantToddler
+                location:
+                  zip: zip
+                  address: address
+                  city: city
+                  lon: lon
+                  state: state
+                  lat: lat
+                preferred_name:
+                  middle: middle
+                  last: last
+                  first: first
+              contact:
+                phone_type: Cell
+                phone: phone
+                sis_id: sis_id
+                legacy_id: legacy_id
+                student_relationships:
+                - student: student
+                  relationship: Parent
+                  type: Parent/Guardian
+                - student: student
+                  relationship: Parent
+                  type: Parent/Guardian
+              staff:
+                ext: "{}"
+                credentials:
+                  district_username: district_username
+                schools:
+                - schools
+                - schools
+                roles:
+                - roles
+                - roles
+                staff_id: staff_id
+                legacy_id: legacy_id
+                title: title
+                department: department
+            name:
+              middle: middle
+              last: last
+              first: first
+            id: id
+            last_modified: last_modified
+            email: email
+        links:
+        - rel: next
+          uri: uri
+        - rel: next
+          uri: uri
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/UserResponse'
+          type: array
+        links:
+          items:
+            $ref: '#/components/schemas/Link'
+          type: array
+      type: object
+      x-konfig-is-used-in-successful-response: true
+    konfig-generated-schema-single-parameter-schema-get--courses:
+      properties:
+        limit:
+          type: integer
+        starting_after:
+          type: string
+        ending_before:
+          type: string
+        count:
+          enum:
+          - ""
+          - "true"
+          - "false"
+          - undefined
+          type: string
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - limit
+      - starting_after
+      - ending_before
+      - count
+    konfig-generated-schema-single-parameter-schema-get--courses-id:
+      properties:
+        id:
+          type: string
+      required:
+      - id
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - id
+    konfig-generated-schema-single-parameter-schema-get--courses-id-district:
+      properties:
+        id:
+          type: string
+      required:
+      - id
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - id
+    konfig-generated-schema-single-parameter-schema-get--courses-id-resources:
+      properties:
+        id:
+          type: string
+        limit:
+          type: integer
+        starting_after:
+          type: string
+        ending_before:
+          type: string
+      required:
+      - id
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - id
+      - limit
+      - starting_after
+      - ending_before
+    konfig-generated-schema-single-parameter-schema-get--courses-id-schools:
+      properties:
+        id:
+          type: string
+        limit:
+          type: integer
+        starting_after:
+          type: string
+        ending_before:
+          type: string
+      required:
+      - id
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - id
+      - limit
+      - starting_after
+      - ending_before
+    konfig-generated-schema-single-parameter-schema-get--courses-id-sections:
+      properties:
+        id:
+          type: string
+        limit:
+          type: integer
+        starting_after:
+          type: string
+        ending_before:
+          type: string
+      required:
+      - id
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - id
+      - limit
+      - starting_after
+      - ending_before
+    konfig-generated-schema-single-parameter-schema-get--districts:
+      properties:
+        count:
+          enum:
+          - ""
+          - "true"
+          - "false"
+          - undefined
+          type: string
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - count
+    konfig-generated-schema-single-parameter-schema-get--districts-id:
+      properties:
+        id:
+          type: string
+      required:
+      - id
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - id
+    konfig-generated-schema-single-parameter-schema-get--resources:
+      properties:
+        limit:
+          type: integer
+        starting_after:
+          type: string
+        ending_before:
+          type: string
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - limit
+      - starting_after
+      - ending_before
+    konfig-generated-schema-single-parameter-schema-get--resources-id:
+      properties:
+        id:
+          type: string
+      required:
+      - id
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - id
+    konfig-generated-schema-single-parameter-schema-get--resources-id-courses:
+      properties:
+        id:
+          type: string
+        limit:
+          type: integer
+        starting_after:
+          type: string
+        ending_before:
+          type: string
+      required:
+      - id
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - id
+      - limit
+      - starting_after
+      - ending_before
+    konfig-generated-schema-single-parameter-schema-get--resources-id-sections:
+      properties:
+        id:
+          type: string
+        limit:
+          type: integer
+        starting_after:
+          type: string
+        ending_before:
+          type: string
+      required:
+      - id
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - id
+      - limit
+      - starting_after
+      - ending_before
+    konfig-generated-schema-single-parameter-schema-get--resources-id-users:
+      properties:
+        id:
+          type: string
+        role:
+          enum:
+          - student
+          - teacher
+          type: string
+        limit:
+          type: integer
+        starting_after:
+          type: string
+        ending_before:
+          type: string
+      required:
+      - id
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - id
+      - role
+      - limit
+      - starting_after
+      - ending_before
+    konfig-generated-schema-single-parameter-schema-get--schools:
+      properties:
+        limit:
+          type: integer
+        starting_after:
+          type: string
+        ending_before:
+          type: string
+        count:
+          enum:
+          - ""
+          - "true"
+          - "false"
+          - undefined
+          type: string
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - limit
+      - starting_after
+      - ending_before
+      - count
+    konfig-generated-schema-single-parameter-schema-get--schools-id:
+      properties:
+        id:
+          type: string
+      required:
+      - id
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - id
+    konfig-generated-schema-single-parameter-schema-get--schools-id-courses:
+      properties:
+        id:
+          type: string
+        limit:
+          type: integer
+        starting_after:
+          type: string
+        ending_before:
+          type: string
+      required:
+      - id
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - id
+      - limit
+      - starting_after
+      - ending_before
+    konfig-generated-schema-single-parameter-schema-get--schools-id-district:
+      properties:
+        id:
+          type: string
+      required:
+      - id
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - id
+    konfig-generated-schema-single-parameter-schema-get--schools-id-sections:
+      properties:
+        id:
+          type: string
+        limit:
+          type: integer
+        starting_after:
+          type: string
+        ending_before:
+          type: string
+      required:
+      - id
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - id
+      - limit
+      - starting_after
+      - ending_before
+    konfig-generated-schema-single-parameter-schema-get--schools-id-terms:
+      properties:
+        id:
+          type: string
+        limit:
+          type: integer
+        starting_after:
+          type: string
+        ending_before:
+          type: string
+      required:
+      - id
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - id
+      - limit
+      - starting_after
+      - ending_before
+    konfig-generated-schema-single-parameter-schema-get--schools-id-users:
+      properties:
+        id:
+          type: string
+        role:
+          enum:
+          - staff
+          - student
+          - teacher
+          type: string
+        primary:
+          enum:
+          - ""
+          - "true"
+          type: string
+        limit:
+          type: integer
+        starting_after:
+          type: string
+        ending_before:
+          type: string
+      required:
+      - id
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - id
+      - role
+      - primary
+      - limit
+      - starting_after
+      - ending_before
+    konfig-generated-schema-single-parameter-schema-get--sections:
+      properties:
+        limit:
+          type: integer
+        starting_after:
+          type: string
+        ending_before:
+          type: string
+        count:
+          enum:
+          - ""
+          - "true"
+          - "false"
+          - undefined
+          type: string
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - limit
+      - starting_after
+      - ending_before
+      - count
+    konfig-generated-schema-single-parameter-schema-get--sections-id:
+      properties:
+        id:
+          type: string
+      required:
+      - id
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - id
+    konfig-generated-schema-single-parameter-schema-get--sections-id-course:
+      properties:
+        id:
+          type: string
+      required:
+      - id
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - id
+    konfig-generated-schema-single-parameter-schema-get--sections-id-district:
+      properties:
+        id:
+          type: string
+      required:
+      - id
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - id
+    konfig-generated-schema-single-parameter-schema-get--sections-id-resources:
+      properties:
+        id:
+          type: string
+        limit:
+          type: integer
+        starting_after:
+          type: string
+        ending_before:
+          type: string
+      required:
+      - id
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - id
+      - limit
+      - starting_after
+      - ending_before
+    konfig-generated-schema-single-parameter-schema-get--sections-id-school:
+      properties:
+        id:
+          type: string
+      required:
+      - id
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - id
+    konfig-generated-schema-single-parameter-schema-get--sections-id-term:
+      properties:
+        id:
+          type: string
+      required:
+      - id
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - id
+    konfig-generated-schema-single-parameter-schema-get--sections-id-users:
+      properties:
+        id:
+          type: string
+        role:
+          enum:
+          - student
+          - teacher
+          type: string
+        limit:
+          type: integer
+        starting_after:
+          type: string
+        ending_before:
+          type: string
+      required:
+      - id
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - id
+      - role
+      - limit
+      - starting_after
+      - ending_before
+    konfig-generated-schema-single-parameter-schema-get--terms:
+      properties:
+        limit:
+          type: integer
+        starting_after:
+          type: string
+        ending_before:
+          type: string
+        count:
+          enum:
+          - ""
+          - "true"
+          - "false"
+          - undefined
+          type: string
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - limit
+      - starting_after
+      - ending_before
+      - count
+    konfig-generated-schema-single-parameter-schema-get--terms-id:
+      properties:
+        id:
+          type: string
+      required:
+      - id
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - id
+    konfig-generated-schema-single-parameter-schema-get--terms-id-district:
+      properties:
+        id:
+          type: string
+      required:
+      - id
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - id
+    konfig-generated-schema-single-parameter-schema-get--terms-id-schools:
+      properties:
+        id:
+          type: string
+        limit:
+          type: integer
+        starting_after:
+          type: string
+        ending_before:
+          type: string
+      required:
+      - id
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - id
+      - limit
+      - starting_after
+      - ending_before
+    konfig-generated-schema-single-parameter-schema-get--terms-id-sections:
+      properties:
+        id:
+          type: string
+        limit:
+          type: integer
+        starting_after:
+          type: string
+        ending_before:
+          type: string
+      required:
+      - id
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - id
+      - limit
+      - starting_after
+      - ending_before
+    konfig-generated-schema-single-parameter-schema-get--users:
+      properties:
+        limit:
+          type: integer
+        role:
+          enum:
+          - contact
+          - district_admin
+          - staff
+          - student
+          - teacher
+          type: string
+        starting_after:
+          type: string
+        ending_before:
+          type: string
+        count:
+          enum:
+          - ""
+          - "true"
+          - "false"
+          - undefined
+          type: string
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - limit
+      - role
+      - starting_after
+      - ending_before
+      - count
+    konfig-generated-schema-single-parameter-schema-get--users-id:
+      properties:
+        id:
+          type: string
+      required:
+      - id
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - id
+    konfig-generated-schema-single-parameter-schema-get--users-id-district:
+      properties:
+        id:
+          type: string
+      required:
+      - id
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - id
+    konfig-generated-schema-single-parameter-schema-get--users-id-mycontacts:
+      properties:
+        id:
+          type: string
+        limit:
+          type: integer
+        starting_after:
+          type: string
+        ending_before:
+          type: string
+      required:
+      - id
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - id
+      - limit
+      - starting_after
+      - ending_before
+    konfig-generated-schema-single-parameter-schema-get--users-id-mystudents:
+      properties:
+        id:
+          type: string
+        limit:
+          type: integer
+        starting_after:
+          type: string
+        ending_before:
+          type: string
+      required:
+      - id
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - id
+      - limit
+      - starting_after
+      - ending_before
+    konfig-generated-schema-single-parameter-schema-get--users-id-myteachers:
+      properties:
+        id:
+          type: string
+        limit:
+          type: integer
+        starting_after:
+          type: string
+        ending_before:
+          type: string
+      required:
+      - id
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - id
+      - limit
+      - starting_after
+      - ending_before
+    konfig-generated-schema-single-parameter-schema-get--users-id-resources:
+      properties:
+        id:
+          type: string
+        limit:
+          type: integer
+        starting_after:
+          type: string
+        ending_before:
+          type: string
+      required:
+      - id
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - id
+      - limit
+      - starting_after
+      - ending_before
+    konfig-generated-schema-single-parameter-schema-get--users-id-schools:
+      properties:
+        id:
+          type: string
+        primary:
+          enum:
+          - ""
+          - "true"
+          type: string
+        limit:
+          type: integer
+        starting_after:
+          type: string
+        ending_before:
+          type: string
+      required:
+      - id
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - id
+      - primary
+      - limit
+      - starting_after
+      - ending_before
+    konfig-generated-schema-single-parameter-schema-get--users-id-sections:
+      properties:
+        id:
+          type: string
+        limit:
+          type: integer
+        starting_after:
+          type: string
+        ending_before:
+          type: string
+      required:
+      - id
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - id
+      - limit
+      - starting_after
+      - ending_before
+  securitySchemes:
+    oauth:
+      flows:
+        authorizationCode:
+          authorizationUrl: https://clever.com/oauth/authorize
+          scopes: {}
+          tokenUrl: https://clever.com/oauth/tokens
+      type: oauth2
+      x-konfig-globally-required-security: true
+x-samples-languages:
+- curl
+- node
+- ruby
+- python
+- php
+- java
+- go
+
